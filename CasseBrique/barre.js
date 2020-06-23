@@ -33,7 +33,7 @@ function Barre() {
             this.location.x = 0;
         }
         if( this.location.x+this.width > widthScreen ) {
-            this.location.x = widthScreen-this.width;
+            this.location.x = widthScreen-this.width-1;
         }
     }
 }

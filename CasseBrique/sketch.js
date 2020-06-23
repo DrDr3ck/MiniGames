@@ -15,7 +15,7 @@ function resetGame() {
   const brickSpacing = (widthScreen -margin-margin) / bricksPerRow;
   bricks = [];
   for(let j=0; j < 5; j++ ) {
-    for(let i=0; i < 8; i++ ) {
+    for(let i=0; i < 10; i++ ) {
       bricks.push(new Brique(brickSpacing*i+margin, 100+j*30, brickSize, 25, 1));
     }
   }
@@ -27,7 +27,7 @@ function resetGame() {
 
 function setup() { 
   widthScreen = 800;
-  heightScreen = 600;
+  heightScreen = 800;
   createCanvas(widthScreen+200, heightScreen);
   textSize(32);
   textFont('Helvetica');
@@ -40,7 +40,7 @@ function draw() {
   // static render as background
   background(195,212,231);
   fill(165,192,222);
-  rect(widthScreen, 0, width, height);
+  rect(widthScreen+2, 0+2, width-widthScreen-1-4, height-1-4, 20);
 
   if( playing === "play" ) {
     //physics
@@ -83,8 +83,8 @@ function draw() {
     text('Press space to restart', widthScreen/2, 300);
   }
   fill(6,49,96);
-  textAlign(LEFT);
-  text(`Score ${scorePlayer}`, widthScreen+30, 30);
+  textAlign(CENTER);
+  text(`Score ${scorePlayer}`, widthScreen+(width-widthScreen)/2, 30);
   clock.show();
 }
 
