@@ -7,6 +7,7 @@ function Brique(x,y,widthScreen,height,score) {
 
     this.show = function() {
         fill(this.color);
+        strokeWeight(this.score);
         rect(this.location.x, this.location.y, this.width, this.height);
     }
 
@@ -46,6 +47,7 @@ function Brique(x,y,widthScreen,height,score) {
             } else {
                 ball.reverse('y');
             }
+            this.score -= 1;
             return true;
         }
         return false;

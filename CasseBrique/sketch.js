@@ -16,13 +16,15 @@ function resetGame() {
   bricks = [];
   for(let j=0; j < 5; j++ ) {
     for(let i=0; i < 10; i++ ) {
-      bricks.push(new Brique(brickSpacing*i+margin, 100+j*30, brickSize, 25, 1));
+      bricks.push(new Brique(brickSpacing*i+margin, 100+j*30, brickSize, 25, floor(1+random(3))));
     }
   }
   playing = "play";
   scorePlayer = 0;
   angleMode(DEGREES);
   clock = new Clock(width-30, height-30,25);
+
+  document.body.style.backgroundColor = "#1168CC";
 }
 
 function setup() { 
@@ -49,9 +51,11 @@ function draw() {
     for( let i = bricks.length-1; i >= 0; i--) {
       const brick = bricks[i];
       if( brick.collide(balle) ) {
-        scorePlayer += brick.score;
-        bricks.splice(i,1);
-        break;
+        scorePlayer += 1;
+        if( brick.score === 0) {
+          bricks.splice(i,1);
+          break;
+        }
       }
     }
 
@@ -73,7 +77,9 @@ function draw() {
   }
 
   // render
+  push();
   bricks.forEach(brick => brick.show());
+  pop();
   barre.show();
   balle.show();
   
