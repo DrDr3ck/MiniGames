@@ -32,10 +32,11 @@ function setup() {
       }
     }
   }
+  console.log("Starting with "+spots.length + " spots");
 } 
 
 function addNewCircle() {
-  const spotIndex = Math.floor(random(spots.length));
+  const spotIndex = Math.floor(random(spots.length-circles.length));
   const x = spots[spotIndex].x;
   const y = spots[spotIndex].y;
   let valid = true;
@@ -45,6 +46,10 @@ function addNewCircle() {
       valid = false;
     }
   });
+  // Performance enhancement: swap spotIndex with last valid element and decrease size of spots.length
+  // swap spotIndex with spots.length-circles.length
+  spots[spotIndex].x = spots[spots.length-circles.length-1].x;
+  spots[spotIndex].y = spots[spots.length-circles.length-1].y;
   if( valid ) {
     return new Circle(x, y, initialRadius);
   } else {
@@ -55,7 +60,7 @@ function addNewCircle() {
 function draw() { 
   background(51);
 
-  const total = 1;
+  const total = 10;
   let count = 0;
   let attempts = 0;
 
@@ -68,7 +73,7 @@ function draw() {
     attempts++;
     if( attempts > 1000 ) {
       noLoop();
-      console.log("rendered");
+      console.log("Rendered with "+circles.length+ " circles");
       break;
     }
   }
